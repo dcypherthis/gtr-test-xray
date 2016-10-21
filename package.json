@@ -1,0 +1,46 @@
+{
+  "name": "gtr-test-xray",
+  "version": "0.1.0",
+  "description": "A WebdriverIO-based test testing library for the guitar practice app.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcypherthis/gtr-test-xray.git"
+  },
+  "homepage": "https://guitar-practice-app.herokuapp.com/",
+  "bugs": {
+    "url": "http://github.com/dcypherthis/gtr-test-xray",
+    "email": "jcypher@myemma.com"
+  },
+  "contributors": [
+    "Josh Cypher <jcypher@myemma.com> (http://github.com/dcypherthis/)",
+    "Jackson Streeter <jstreeter@myemma.com> (http://github.com/streeter8/)"
+  ],
+  "license": "MIT",
+  "main": "config/master.conf.js",
+  "scripts": {
+    "lint": "eslint ./*",
+    "node-inspector": "node-inspector --debug-port 5859 --no-preload",
+  },
+  "dependencies": {
+    "babel-preset-es2015": "6.14.0",
+    "babel-register": "^6.14.0",
+    "chai": "3.5.0",
+    "config": "^1.21.0",
+    "cucumber": "^1.2.0",
+    "deepmerge": "^0.2.10",
+    "node-uuid": "^1.4.7",
+    "request": "^2.74.0",
+    "wdio-cucumber-framework": "0.2.5",
+    "wdio-dot-reporter": "0.0.6",
+    "wdio-json-reporter": "0.0.4",
+    "wdio-junit-reporter": "^0.1.0",
+    "wdio-sauce-service": "^0.2.5",
+    "wdio-spec-reporter": "0.0.3",
+    "webdriverio": "^4.2.16"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-emma": "git+ssh://git@github.com/emmadev/eslint-config-emma.git#v1.1.0",
+    "eslint-plugin-react": "^3.11.3",
+  }
+}
