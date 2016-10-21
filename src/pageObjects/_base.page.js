@@ -1,5 +1,5 @@
 const _text = require('./text.util');
-import Window from '../src/utilities/window.util';
+import Window from '../utilities/window.util';
 let _window;
 
 /**
