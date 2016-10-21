@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.1.3
+- fix text util import path
+
 ### 0.1.2
 - fix window util import path
 

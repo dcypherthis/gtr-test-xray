@@ -1,4 +1,4 @@
-const _text = require('./text.util');
+const _text = require('../utilities/text.util');
 import Window from '../utilities/window.util';
 let _window;
 
