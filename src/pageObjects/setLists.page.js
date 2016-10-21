@@ -1,5 +1,5 @@
 import _Base_page from './_base.page';
-import UiMap from '../src/uiMaps/setLists.uiMap';
+import UiMap from '../uiMaps/setLists.uiMap';
 let _elements;
 
 export default class SetLists_page extends _Base_page {

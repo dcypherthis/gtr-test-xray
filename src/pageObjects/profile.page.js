@@ -1,5 +1,5 @@
 import _Base_page from './_base.page';
-import UiMap from '../src/uiMaps/profile.uiMap';
+import UiMap from '../uiMaps/profile.uiMap';
 let _elements;
 
 export default class Profile_page extends _Base_page {

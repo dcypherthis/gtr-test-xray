@@ -1,4 +1,4 @@
-let account_id, package_id, username, password, social_share_mailing;
+let username, password;
 
 /**
  * Helps manage account data associated with logging into emma

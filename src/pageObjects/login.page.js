@@ -1,5 +1,5 @@
 import _Base_page from './_base.page';
-import UiMap from '../src/uiMaps/login.uiMap';
+import UiMap from '../uiMaps/login.uiMap';
 let _elements;
 
 export default class Login_page extends _Base_page {

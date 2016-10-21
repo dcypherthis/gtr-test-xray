@@ -1,6 +1,9 @@
 # Changelog
 
 ### 0.1.3
+- fix uiMap import paths
+
+### 0.1.3
 - fix text util import path
 
 ### 0.1.2

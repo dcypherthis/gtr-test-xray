@@ -1,5 +1,5 @@
 import _Base_page from './_base.page';
-import UiMap from '../src/uiMaps/songs.uiMap';
+import UiMap from '../uiMaps/songs.uiMap';
 let _elements;
 
 export default class Songs_page extends _Base_page {
