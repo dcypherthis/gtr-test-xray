@@ -1,12 +1,12 @@
 import _Base_page from './_base.page';
-import UiMap from '../uiMaps/setLists.uiMap';
+import UiMap from '../src/uiMaps/signup.uiMap';
 let _elements;
 
-export default class SetLists_page extends _Base_page {
+export default class Signup_page extends _Base_page {
 
     /* Default Functions */
     get name() {
-        return "Set Lists Page";
+        return "Profile Page";
     }
 
     constructor() {

@@ -1,12 +1,12 @@
 import _Base_page from './_base.page';
-import UiMap from '../uiMaps/home.uiMap';
+import UiMap from '../src/uiMaps/setLists.uiMap';
 let _elements;
 
-export default class Home_page extends _Base_page {
+export default class SetLists_page extends _Base_page {
 
     /* Default Functions */
     get name() {
-        return `Home Page`;
+        return "Set Lists Page";
     }
 
     constructor() {
@@ -19,7 +19,7 @@ export default class Home_page extends _Base_page {
     }
 
     pageLoadIndicator() {
-        return this.findSelector(`Guitar Practice Header`);
+        return _elements.heading;
     }
 
     findSelector(target) {
@@ -38,16 +38,13 @@ export default class Home_page extends _Base_page {
                 return _elements.h1Message;
             case `Get Started Button`:
                 return _elements.btnGetStarted;
-            case `login`:
-                return _elements.aNavLogin;
-            case `signup`:
-                return _elements.aNavSignup;
             default:
                 let error = new Error(`\nMessage:\n    Element ${target} is not defined on the ${this.name}\nStack Trace:`); // eslint-disable-line prefer-const
                 error.message = `${error.stack}`;
                 throw error;
         }
     }
+
     /* Page-Specific Functions */
 
 }
