@@ -19,7 +19,7 @@
   "main": "config/master.conf.js",
   "scripts": {
     "lint": "eslint ./*",
-    "node-inspector": "node-inspector --debug-port 5859 --no-preload",
+    "node-inspector": "node-inspector --debug-port 5859 --no-preload"
   },
   "dependencies": {
     "babel-preset-es2015": "6.14.0",
@@ -41,6 +41,6 @@
   "devDependencies": {
     "eslint": "^3.4.0",
     "eslint-config-emma": "git+ssh://git@github.com/emmadev/eslint-config-emma.git#v1.1.0",
-    "eslint-plugin-react": "^3.11.3",
+    "eslint-plugin-react": "^3.11.3"
   }
 }
