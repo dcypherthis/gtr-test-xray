@@ -1,5 +1,6 @@
 /**
- * A base class with keys and values for css selectors shared between all pages
+ * @interface BaseUiMap
+ * @description A Base UiMap containing selectors for navigation and common ui elements. All other UiMaps extend this class
  */
 export default class UiMap {
 
