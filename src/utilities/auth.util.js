@@ -1,4 +1,4 @@
-import Login_page from '../pageObjects/login.page';
+import Login_page from '../pageObjects/login/login.page';
 
 const _login_page = new Login_page();
 const loginUrl = browser.options.env.login_url;

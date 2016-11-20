@@ -1,12 +1,17 @@
-import _Base_page from './_base.page';
-import UiMap from '../uiMaps/setLists.uiMap';
+import BasePage from '../_base.page';
+import UiMap from './home.uiMap';
 let _elements;
 
-export default class SetLists_page extends _Base_page {
+/**
+ * @class Home_page
+ * @summary This page object represents the in-app upgrades page available to non-packaged pro accounts
+ * @extends BasePage
+ */
+export default class Home_page extends BasePage {
 
     /* Default Functions */
     get name() {
-        return "Set Lists Page";
+        return `Home Page`;
     }
 
     constructor() {
@@ -19,7 +24,7 @@ export default class SetLists_page extends _Base_page {
     }
 
     pageLoadIndicator() {
-        return _elements.heading;
+        return this.findSelector(`Guitar Practice Header`);
     }
 
     findSelector(target) {
@@ -38,13 +43,16 @@ export default class SetLists_page extends _Base_page {
                 return _elements.h1Message;
             case `Get Started Button`:
                 return _elements.btnGetStarted;
+            case `login`:
+                return _elements.aNavLogin;
+            case `signup`:
+                return _elements.aNavSignup;
             default:
                 let error = new Error(`\nMessage:\n    Element ${target} is not defined on the ${this.name}\nStack Trace:`); // eslint-disable-line prefer-const
                 error.message = `${error.stack}`;
                 throw error;
         }
     }
-
     /* Page-Specific Functions */
 
 }

@@ -3,13 +3,17 @@ import Window from '../utilities/window.util';
 let _window;
 
 /**
- * A Base page object class that is extended by all other page objects.  Common functions can be placed here.
+ * @class BasePage
+ * @summary The Base Page Object class
+ * @description A Base page object class that is extended by all other page objects.  Common functions to all pages can
+ * be placed here.
  */
-export default class _Base_page {
+export default class BasePage {
 
     /**
-     * Returns the name of the page
-     *
+     * @summary Returns the name of the page
+     * @memberOf BasePage
+     * @method name
      * @returns {String} the name of the page
      */
     get name() {
@@ -17,10 +21,11 @@ export default class _Base_page {
     }
 
     /**
-     * Waits for a selector to be visible and then clicks on it
-     *
+     * @summary Waits for a selector to be visible and then clicks on it
+     * @memberOf BasePage
+     * @method waitAndClick
      * @param {String} target - The element to be clicked on
-     * @returns {void}
+     * @return {void}
      */
     waitAndClick(target) {
         const selector = this.findSelector(target);
@@ -31,7 +36,9 @@ export default class _Base_page {
     }
 
     /**
-     * Searches for a selector based on a parameter and determines if it is currently visible in the browser.
+     * @summary Searches for a selector based on a parameter and determines if it is currently visible in the browser.
+     * @memberOf BasePage
+     * @method CheckVisibility
      * @param {string} target - the element that you are looking for
      * @param {boolean} isVisible - checks to if elements is visible if true
      *  or not visible if false
@@ -46,8 +53,9 @@ export default class _Base_page {
     }
 
     /**
-     * Finds a selector based on a parameter, wait for it to be visible and then
-     *  scrolls to browser to that selector
+     * @summary Finds a selector based on a parameter, wait for it to be visible and then scrolls to browser to that selector
+     * @memberOf BasePage
+     * @method scrollTo
      * @param {string} target - the element that you want to scroll to
      * @returns {void}
      */
@@ -58,8 +66,10 @@ export default class _Base_page {
     }
 
     /**
-     * Finds a selector based on a parameter, wait for it to be visible and then moves the cursor over it to engage
-     * a possible hover action.
+     * @summary Finds a selector based on a parameter, wait for it to be visible and then moves the cursor over it to
+     * engage a possible hover action.
+     * @memberOf BasePage
+     * @method hoverOver
      * @param {string} target - the element that you want to interact with
      * @returns {void}
      */
@@ -72,11 +82,13 @@ export default class _Base_page {
     }
 
     /**
-     * Waits for a specific element to load to indicate the page has finished loading. If the skipWait parameter is
-     * used, it does not wait for the element to be visible and check for visibility as soon as the DOM has finished
-     * loading.  This is useful to call after attempting to load a new page, so that the next command does not fire
-     * before the second page has had a chance to load all the way.
-     * @param {string} skipWait (optional) - optionally skips the waitForVisible() command.
+     * @summary Waits for a specific element to load to indicate the page has finished loading.
+     * @description If the skipWait parameter is used, it does not wait for the element to be visible and check for
+     * visibility as soon as the DOM has finished loading. This is useful to call after attempting to load a new page,
+     * so that the next command does not fire before the second page has had a chance to load all the way.
+     * @memberOf BasePage
+     * @method isOnPage
+     * @param {boolean} skipWait (optional) - optionally skips the waitForVisible() command.
      * @returns {boolean} If true, the page is assumed to have finished loading.
      */
     isOnPage(skipWait) {
@@ -90,7 +102,11 @@ export default class _Base_page {
     }
 
     /**
-     * Navigates to a specific URL defined in the context of the currently instantiated pageObject.
+     * @summary Overrides the basePage function. Navigates to an account-specific url if performing a social share test,
+     * otherwise uses the default url
+     * @memberOf BasePage
+     * @method navigate
+     * @param {string} target - the page that is navigated to
      * @returns {void}
      */
     navigate() {
@@ -98,7 +114,9 @@ export default class _Base_page {
     }
 
     /**
-     * Sets a conditional timeout period for waiting all waiting functions. Default is set to 10 seconds.
+     * @summary Sets a conditional timeout period for waiting all waiting functions. Default is set to 10 seconds.
+     * @memberOf BasePage
+     * @method findTimeout
      * @param {string} target - A selector that we want to know a timeout for
      * @returns {number} A number in ms that describes the length of the timeout period.
      */
@@ -110,9 +128,11 @@ export default class _Base_page {
     }
 
     /**
-     * Determines if an element is on the current page. Searches the known selectors in the current page object, and
-     * queries the DOM for a match.  Returns a boolean if the element exists.  Does not have to be visible to
-     * provide a truthy return.
+     * @summary Determines if an element is on the current page.
+     * @description Searches the known selectors in the current page object, and queries the DOM for a match.  Returns a
+     * boolean if the element exists.  Does not have to be visible to provide a truthy return.
+     * @memberOf BasePage
+     * @method elementIsOnPage
      * @param {string} element - the element that you are searching for
      * @return {boolean} If true, an element matching the (element) parameter is on the current page.
      */
@@ -129,17 +149,21 @@ export default class _Base_page {
     }
 
     /**
-     * Search for a specific selector (element) and return a style attribute attached to it.
-     * @param {string} element - the element that will be analyzed
+     * @summary Search for a specific selector (element) and return a style attribute attached to it.
+     * @memberOf BasePage
+     * @method getStyleAttribute
+     * @param {string} target - the element that will be analyzed
      * @param {string} property - A CSS property that will be analyzed
      * @returns {string} The CSS property value parsed to a string
      */
-    getStyleAttribute(element, property) {
-        return browser.getCssProperty(this.findSelector(element), property).parsed.string;
+    getStyleAttribute(target, property) {
+        return browser.getCssProperty(this.findSelector(target), property).parsed.string;
     }
 
     /**
-     * Waits for an element to include a specific snippet of text.
+     * @summary Waits for an element to include a specific snippet of text.
+     * @memberOf BasePage
+     * @method assertText
      * @param {string} target - An element that can receive text
      * @param {string} value - a descriptor that represents a snippet of text in the text.util.js file.
      * @return {boolean} If true, the text inside the element contains the text defined by (value)
@@ -154,9 +178,12 @@ export default class _Base_page {
     }
 
     /**
-     * Get the current title from Selenium and compare it to the title in the uimap.  Waits until they both are the
-     * same before returning a boolean, otherwise it throws a timeout exception.
-     * @returns {bool} Returns true if the page title is correct
+     * @summary Get the current title from Selenium and compare it to the title in the uimap,.
+     * @description Waits until they both are the same before returning a boolean, otherwise it throws a timeout exception.
+     * @method validatePageTitle
+     * @memberOf BasePage
+     * @returns {boolean} Returns true if the page title is correct
+     * @throws {Exception} Throws error if page title is not updated to equal the expectation in the allotted time
      */
     validatePageTitle() {
         const pageTitle = this.getPageTitle();
@@ -168,7 +195,9 @@ export default class _Base_page {
     }
 
     /**
-     * Determines if more than one window is available and then changes the window focus.
+     * @summary Determines if more than one window is available and then changes the window focus.
+     * @memberOf BasePage
+     * @method changeWindow
      * @returns {void}
      */
     changeWindow() {
@@ -176,26 +205,30 @@ export default class _Base_page {
         _window.changeWindow();
     }
 
+    /**
+     * @summary Sets the window focus back to the first opened window
+     * @memberOf BasePage
+     * @method setWindowFocus
+     * @returns {void}
+     */
     setWindowFocus() {
         _window = new Window();
         _window.setFocus();
     }
 
     /**
-     * Determines if an element is or is not visible on a page
-     *
+     * @summary Determines if an element is or is not visible on a page
+     * @description We created this function in response to the WebdriverIO waitForVisible function fritzing out on us
+     * http://webdriver.io/api/utility/waitForVisible.html, https://github.com/emmadev/quarts/issues/250
+     * @memberOf BasePage
+     * @method waitForVisible
      * @param {string} selector - element to wait for
      * @param {int} timeout (optional) - in ms (default: 5000)
      * @param {int} interval (optional) - between condition checks (default: 250)
      * @param {string} error (optional) - Error message to display
      * @param {boolean} reverse (optional) - checks that element is visible if true,
      *  or not visible if false (default: true)
-     * @returns {boolean}
-     *
-     * NOTE: We created this function in response to the WebdriverIO
-     *  waitForVisible function fritzing out on us
-     *  http://webdriver.io/api/utility/waitForVisible.html
-     *  https://github.com/emmadev/quarts/issues/250
+     * @returns {boolean} If true, the element is currently visible
      */
     waitForVisible(selector, timeout, interval, error, reverse) {
         if (typeof timeout !== "number") {
@@ -220,7 +253,9 @@ export default class _Base_page {
     }
 
     /**
-     * Determines if more than one window is available and then changes the window focus.
+     * @summary Determines if more than one window is available and then changes the window focus.
+     * @memberOf BasePage
+     * @method changeTab
      * @returns {void}
      */
     changeTab() {
@@ -230,6 +265,8 @@ export default class _Base_page {
 
     /**
      * Attempt to change the window or tab in a hail-mary effort to get where you need to go
+     * @memberOf BasePage
+     * @method changeWindowOrTab
      * @returns {void}
      */
     changeWindowOrTab() {

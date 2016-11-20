@@ -1,27 +1,61 @@
-import _Base_page from './_base.page';
-import UiMap from '../uiMaps/songs.uiMap';
+import BasePage from '../_base.page';
+import UiMap from './songs.uiMap';
 let _elements;
 
-export default class Songs_page extends _Base_page {
+/**
+ * @class Songs_page
+ * @summary This page object represents the in-app upgrades page available to non-packaged pro accounts
+ * @extends BasePage
+ */
+export default class Songs_page extends BasePage {
 
-    /* Default Functions */
+    /**
+     * @summary Returns the name of the page
+     * @memberOf BasePage
+     * @method name
+     * @returns {String} the name of the page
+     */
     get name() {
-        return "Profile Page";
+        return "Songs Page";
     }
 
+    /**
+     * @method constructor
+     * @memberOf Songs_page
+     * @summary The constructor for this class
+     */
     constructor() {
         super();
         _elements = new UiMap();
     }
 
+    /**
+     * @method getPageUrl
+     * @memberOf Songs_page
+     * @summary Looks up the pre-defined URL for the page in the uiMap. Does not access the browser object.
+     * @returns {string} url defined in the ui map
+     */
     getPageUrl() {
         return _elements.url;
     }
 
+    /**
+     * @method pageLoadIndicator
+     * @memberOf Songs_page
+     * @summary Provides a selector that, when visible, indicates that the page has loaded enough for interaction.
+     * @returns {string} A css selector string
+     */
     pageLoadIndicator() {
         return this.findSelector(`Songs Heading`);
     }
 
+    /**
+     * @method findSelector
+     * @memberOf Songs_page
+     * @summary Searches for a selector given a specific target
+     * @param {string} target the elements we want the selector for
+     * @returns {string} the selector for the target
+     */
     findSelector(target) {
         switch (target) {
             case `Guitar Practice Header`:
@@ -63,6 +97,14 @@ export default class Songs_page extends _Base_page {
 
     /* Page-Specific Functions */
 
+    /**
+     * @method enterInput
+     * @memberOf Songs_page
+     * @summary fill in a form element
+     * @param {string} target the elements we want the selector for
+     * @param {string} value the string value to be entered into the form
+     * @returns {void}
+     */
     enterInput(target, value) {
         browser.waitForVisible(this.findSelector(target), 3000);
         browser.setValue(this.findSelector(target), value);

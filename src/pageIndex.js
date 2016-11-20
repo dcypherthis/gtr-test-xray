@@ -1,4 +1,8 @@
-/** Router **/
+/**
+ * @class PageIndex
+ * @summary An index of available page objects
+ */
+
 import Router from './router';
 
 /** Utilities **/
@@ -12,12 +16,12 @@ import Window from './utilities/window.util';
 
 /** PageObjects **/
 
-import Home_page from './pageObjects/home.page';
-import Login_page from './pageObjects/login.page';
-import Profile_page from './pageObjects/profile.page';
-import Signup_page from './pageObjects/signup.page';
-import Songs_page from './pageObjects/songs.page';
-import SetLists_page from './pageObjects/setLists.page';
+import Home_page from './pageObjects/home/home.page';
+import Login_page from './pageObjects/login/login.page';
+import Profile_page from './pageObjects/profile/profile.page';
+import Signup_page from './pageObjects/signup/signup.page';
+import Songs_page from './pageObjects/songs/songs.page';
+import SetLists_page from './pageObjects/setLists/setLists.page';
 
 /** Exports **/
 

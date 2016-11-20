@@ -1,4 +1,4 @@
-import _Base_uiMap from './_Base.uiMap'
+import _Base_uiMap from '../_Base.uiMap';
 
 /**
  * A class with keys and values for css selectors
@@ -7,7 +7,7 @@ export default class UiMap extends _Base_uiMap {
 
     /* URL & Title */
     get url() {
-        return `${browser.options.env.home_url}`;
+        return `${browser.options.env.signup_url}`;
     }
 
     get title() {
@@ -18,13 +18,11 @@ export default class UiMap extends _Base_uiMap {
         return 'AdonisJs - Node.Js MVC Framework';
     }
 
+    /** Navigation **/
+    get navHeading() {
+        return 'body > div.hero.is-primary > nav > h1 > a';
+    }
+
     /* Page Contents */
 
-    get h1Message() {
-        return 'body > section > div > div > h1';
-    }
-
-    get btnGetStarted() {
-        return 'body > section > div > div > h2 > a';
-    }
 }

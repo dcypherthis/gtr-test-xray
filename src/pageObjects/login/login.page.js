@@ -1,27 +1,62 @@
-import _Base_page from './_base.page';
-import UiMap from '../uiMaps/login.uiMap';
+import BasePage from '../_base.page';
+import UiMap from './login.uiMap';
 let _elements;
 
-export default class Login_page extends _Base_page {
+/**
+ * @class Login_page
+ * @summary This page object represents /login
+ * @extends BasePage
+ */
+export default class Login_page extends BasePage {
 
-    /* Default Functions */
+    /**
+     * @method name
+     * @memberOf Login_page
+     * @summary Overrides BasePage.name
+     * @description The name of the Page Object - meant to be used for debugging and error handling
+     * @returns {string} The name of the Page Object
+     */
     get name() {
         return "Login Page";
     }
 
+    /**
+     * @method constructor
+     * @memberOf Login_page
+     * @summary The constructor for this class
+     */
     constructor() {
         super();
         _elements = new UiMap();
     }
 
+    /**
+     * @method getPageUrl
+     * @memberOf Login_page
+     * @summary Looks up the pre-defined URL for the page in the uiMap. Does not access the browser object.
+     * @returns {string} url defined in the ui map
+     */
     getPageUrl() {
         return _elements.url;
     }
 
+    /**
+     * @method pageLoadIndicator
+     * @memberOf Login_page
+     * @summary Provides a selector that, when visible, indicates that the page has loaded enough for interaction.
+     * @returns {string} A css selector string
+     */
     pageLoadIndicator() {
         return this.findSelector(`Guitar Practice Header`);
     }
 
+    /**
+     * @method findSelector
+     * @memberOf Login_page
+     * @summary Searches for a selector given a specific target
+     * @param {string} target the elements we want the selector for
+     * @returns {string} the selector for the target
+     */
     findSelector(target) {
         switch (target) {
             case `Guitar Practice Header`:
@@ -53,10 +88,23 @@ export default class Login_page extends _Base_page {
 
     /* Page-Specific Functions */
 
+    /**
+     * @method submit
+     * @memberOf Login_page
+     * @summary submits the form
+     * @returns {void}
+     */
     submit() {
         this.waitAndClick(`save`);
     }
 
+    /**
+     * @method fillForm
+     * @memberOf Login_page
+     * @param {string} username
+     * @param {string} password
+     * @returns {void}
+     */
     fillForm(username, password) {
         browser.waitForVisible(this.findSelector('Guitar Practice Header'));
         browser.setValue(this.findSelector('username'), username);

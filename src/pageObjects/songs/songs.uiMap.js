@@ -1,4 +1,4 @@
-import _Base_uiMap from './_Base.uiMap';
+import _Base_uiMap from '../_Base.uiMap';
 
 /**
  * A class with keys and values for css selectors
