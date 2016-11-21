@@ -1,4 +1,4 @@
-# gtr-test-xray
+# Gtr-Test-Xray
 
 GTR Test XRAY is a DSL Test library for the guitar test app.  It is imported
 into other node.js applications as a dependency and exposes an API layer 
