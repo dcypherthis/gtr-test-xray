@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>QUARTS Source: pageObjects/_base.page.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.yeti.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">QUARTS</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BasePage.html">BasePage</a></li><li><a href="Home_page.html">Home_page</a></li><li><a href="Login_page.html">Login_page</a></li><li><a href="module.html#.exports">module.exports</a></li><li><a href="PageIndex.html">PageIndex</a></li><li><a href="Profile_page.html">Profile_page</a></li><li><a href="Router.html">Router</a></li><li><a href="SetLists_page.html">SetLists_page</a></li><li><a href="Signup_page.html">Signup_page</a></li><li><a href="Songs_page.html">Songs_page</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BaseUiMap.html">BaseUiMap</a></li><li><a href="Login_uiMap.html">Login_uiMap</a></li><li><a href="Signup_uiMap.html">Signup_uiMap</a></li><li><a href="Songs_uiMap.html">Songs_uiMap</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#allTabs">allTabs</a></li><li><a href="global.html#allWindows">allWindows</a></li><li><a href="global.html#changeTab">changeTab</a></li><li><a href="global.html#changeWindow">changeWindow</a></li><li><a href="global.html#changeWindowOrTab">changeWindowOrTab</a></li><li><a href="global.html#currentTab">currentTab</a></li><li><a href="global.html#currentWindow">currentWindow</a></li><li><a href="global.html#formatSessionData">formatSessionData</a></li><li><a href="global.html#getFormattedTime">getFormattedTime</a></li><li><a href="global.html#getInput">getInput</a></li><li><a href="global.html#getSessionData">getSessionData</a></li><li><a href="global.html#hardAuthCheck">hardAuthCheck</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#makeActive">makeActive</a></li><li><a href="global.html#makeFocus">makeFocus</a></li><li><a href="global.html#makeHover">makeHover</a></li><li><a href="global.html#makeVisited">makeVisited</a></li><li><a href="global.html#navHeading">navHeading</a></li><li><a href="global.html#password">password</a></li><li><a href="global.html#secondTab">secondTab</a></li><li><a href="global.html#secondWindow">secondWindow</a></li><li><a href="global.html#setCredential">setCredential</a></li><li><a href="global.html#setFocus">setFocus</a></li><li><a href="global.html#softAuthCheck">softAuthCheck</a></li><li><a href="global.html#testGroup">testGroup</a></li><li><a href="global.html#username">username</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: pageObjects/_base.page.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const _text = require('../utilities/text.util');
+import Window from '../utilities/window.util';
+let _window;
+
+/**
+ * @class BasePage
+ * @summary The Base Page Object class
+ * @description A Base page object class that is extended by all other page objects.  Common functions to all pages can
+ * be placed here.
+ */
+export default class BasePage {
+
+    /**
+     * @summary Returns the name of the page
+     * @memberOf BasePage
+     * @method name
+     * @returns {String} the name of the page
+     */
+    get name() {
+        return "Base Page";
+    }
+
+    /**
+     * @summary Waits for a selector to be visible and then clicks on it
+     * @memberOf BasePage
+     * @method waitAndClick
+     * @param {String} target - The element to be clicked on
+     * @return {void}
+     */
+    waitAndClick(target) {
+        const selector = this.findSelector(target);
+        browser.waitUntil(() => {
+            return browser.isVisible(selector);
+        }, this.findTimeout(target), `Unable to verify that element, ${selector}, is visible on ${browser.getUrl()}.`, 1000);
+        browser.click(selector);
+    }
+
+    /**
+     * @summary Searches for a selector based on a parameter and determines if it is currently visible in the browser.
+     * @memberOf BasePage
+     * @method CheckVisibility
+     * @param {string} target - the element that you are looking for
+     * @param {boolean} isVisible - checks to if elements is visible if true
+     *  or not visible if false
+     * @returns {boolean} If true, the element is currently visible.
+     */
+    checkVisibility(target, isVisible) {
+        const timeout = this.findTimeout(target);
+        browser.waitUntil(() => {
+            return browser.isVisible(this.findSelector(target)) === isVisible;
+        }, timeout, `Expected visibility of target:${target}, to be: ${isVisible}, in less than ${timeout} seconds`);
+        return true;
+    }
+
+    /**
+     * @summary Finds a selector based on a parameter, wait for it to be visible and then scrolls to browser to that selector
+     * @memberOf BasePage
+     * @method scrollTo
+     * @param {string} target - the element that you want to scroll to
+     * @returns {void}
+     */
+    scrollTo(target) {
+        const selector = this.findSelector(target);
+        this.waitForVisible(selector);
+        browser.scroll(selector);
+    }
+
+    /**
+     * @summary Finds a selector based on a parameter, wait for it to be visible and then moves the cursor over it to
+     * engage a possible hover action.
+     * @memberOf BasePage
+     * @method hoverOver
+     * @param {string} target - the element that you want to interact with
+     * @returns {void}
+     */
+    hoverOver(target) {
+        const selector = this.findSelector(target);
+        browser.waitUntil(() => {
+            return browser.isVisible(selector);
+        }, this.findTimeout(target), `Unable to verify that element, ${selector}, is visible on ${browser.getUrl()}.`);
+        browser.moveToObject(selector, 0, 0);
+    }
+
+    /**
+     * @summary Waits for a specific element to load to indicate the page has finished loading.
+     * @description If the skipWait parameter is used, it does not wait for the element to be visible and check for
+     * visibility as soon as the DOM has finished loading. This is useful to call after attempting to load a new page,
+     * so that the next command does not fire before the second page has had a chance to load all the way.
+     * @memberOf BasePage
+     * @method isOnPage
+     * @param {boolean} skipWait (optional) - optionally skips the waitForVisible() command.
+     * @returns {boolean} If true, the page is assumed to have finished loading.
+     */
+    isOnPage(skipWait) {
+        const selector = this.pageLoadIndicator();
+        if (!skipWait) {
+            browser.waitUntil(() => {
+                return browser.isVisible(selector);
+            }, 10000, `Unable to verify that browser is on the ${this.name} page. The current url is ${browser.getUrl()}`);
+        }
+        return browser.isVisible(selector);
+    }
+
+    /**
+     * @summary Overrides the basePage function. Navigates to an account-specific url if performing a social share test,
+     * otherwise uses the default url
+     * @memberOf BasePage
+     * @method navigate
+     * @param {string} target - the page that is navigated to
+     * @returns {void}
+     */
+    navigate() {
+        browser.url(this.getPageUrl());
+    }
+
+    /**
+     * @summary Sets a conditional timeout period for waiting all waiting functions. Default is set to 10 seconds.
+     * @memberOf BasePage
+     * @method findTimeout
+     * @param {string} target - A selector that we want to know a timeout for
+     * @returns {number} A number in ms that describes the length of the timeout period.
+     */
+    findTimeout(target) {
+        switch (target) {
+            default:
+                return 10000;
+        }
+    }
+
+    /**
+     * @summary Determines if an element is on the current page.
+     * @description Searches the known selectors in the current page object, and queries the DOM for a match.  Returns a
+     * boolean if the element exists.  Does not have to be visible to provide a truthy return.
+     * @memberOf BasePage
+     * @method elementIsOnPage
+     * @param {string} element - the element that you are searching for
+     * @return {boolean} If true, an element matching the (element) parameter is on the current page.
+     */
+    elementIsOnPage(element) {
+        const selector = this.findSelector(element);
+        browser.waitUntil(() => {
+            if (browser.elements(selector)) {
+                return true;
+            } else {
+                return false;
+            }
+        }, 10000, `Expected element, ${element}, to be on the page`);
+        return true;
+    }
+
+    /**
+     * @summary Search for a specific selector (element) and return a style attribute attached to it.
+     * @memberOf BasePage
+     * @method getStyleAttribute
+     * @param {string} target - the element that will be analyzed
+     * @param {string} property - A CSS property that will be analyzed
+     * @returns {string} The CSS property value parsed to a string
+     */
+    getStyleAttribute(target, property) {
+        return browser.getCssProperty(this.findSelector(target), property).parsed.string;
+    }
+
+    /**
+     * @summary Waits for an element to include a specific snippet of text.
+     * @memberOf BasePage
+     * @method assertText
+     * @param {string} target - An element that can receive text
+     * @param {string} value - a descriptor that represents a snippet of text in the text.util.js file.
+     * @return {boolean} If true, the text inside the element contains the text defined by (value)
+     */
+    assertText(target, value) {
+        const info = _text.getInput(value);
+        const selector = this.findSelector(target);
+        browser.waitUntil(() => {
+            return browser.getText(selector).includes(info);
+        }, 10000, `Expected ${target}'s text, ${browser.getText(selector)}, to include ${info}`);
+        return true;
+    }
+
+    /**
+     * @summary Get the current title from Selenium and compare it to the title in the uimap,.
+     * @description Waits until they both are the same before returning a boolean, otherwise it throws a timeout exception.
+     * @method validatePageTitle
+     * @memberOf BasePage
+     * @returns {boolean} Returns true if the page title is correct
+     * @throws {Exception} Throws error if page title is not updated to equal the expectation in the allotted time
+     */
+    validatePageTitle() {
+        const pageTitle = this.getPageTitle();
+        let currentTitle = browser.getTitle();
+        return browser.waitUntil(() => {
+            currentTitle = browser.getTitle();
+            return currentTitle === pageTitle;
+        }, 10000, `The current page title, ${currentTitle} does not match ${pageTitle}`, 250);
+    }
+
+    /**
+     * @summary Determines if more than one window is available and then changes the window focus.
+     * @memberOf BasePage
+     * @method changeWindow
+     * @returns {void}
+     */
+    changeWindow() {
+        _window = new Window();
+        _window.changeWindow();
+    }
+
+    /**
+     * @summary Sets the window focus back to the first opened window
+     * @memberOf BasePage
+     * @method setWindowFocus
+     * @returns {void}
+     */
+    setWindowFocus() {
+        _window = new Window();
+        _window.setFocus();
+    }
+
+    /**
+     * @summary Determines if an element is or is not visible on a page
+     * @description We created this function in response to the WebdriverIO waitForVisible function fritzing out on us
+     * http://webdriver.io/api/utility/waitForVisible.html, https://github.com/emmadev/quarts/issues/250
+     * @memberOf BasePage
+     * @method waitForVisible
+     * @param {string} selector - element to wait for
+     * @param {int} timeout (optional) - in ms (default: 5000)
+     * @param {int} interval (optional) - between condition checks (default: 250)
+     * @param {string} error (optional) - Error message to display
+     * @param {boolean} reverse (optional) - checks that element is visible if true,
+     *  or not visible if false (default: true)
+     * @returns {boolean} If true, the element is currently visible
+     */
+    waitForVisible(selector, timeout, interval, error, reverse) {
+        if (typeof timeout !== "number") {
+            timeout = 5000;
+        }
+        if (typeof interval !== "number") {
+            interval = 250;
+        }
+        if (typeof reverse !== "boolean") {
+            reverse = true;
+        }
+        if (typeof error !== "string") {
+            if (reverse) {
+                error = `Expected element with selector, ${selector}, to be visible on the page`;
+            } else {
+                error = `Expected element with selector, ${selector}, to NOT be visible on the page`;
+            }
+        }
+        browser.waitUntil(() => {
+            return browser.isVisible(selector) === reverse;
+        }, timeout, error, interval);
+    }
+
+    /**
+     * @summary Determines if more than one window is available and then changes the window focus.
+     * @memberOf BasePage
+     * @method changeTab
+     * @returns {void}
+     */
+    changeTab() {
+        _window = new Window();
+        _window.changeTab();
+    }
+
+    /**
+     * Attempt to change the window or tab in a hail-mary effort to get where you need to go
+     * @memberOf BasePage
+     * @method changeWindowOrTab
+     * @returns {void}
+     */
+    changeWindowOrTab() {
+        _window = new Window();
+        _window.changeWindowOrTab();
+    }
+}
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © Josh Cypher.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

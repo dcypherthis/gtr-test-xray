@@ -1,0 +1,27 @@
+{
+    "plugins": ["plugins/markdown"],
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": false,
+        "includeDate": false,
+        "dateFormat": "ddd MMM Do YYYY",
+        "outputSourceFiles": true,
+        "outputSourcePath": true,
+        "systemName": "QUARTS",
+        "footer": "",
+        "copyright": "Copyright © Josh Cypher.",
+        "navType": "vertical",
+        "theme": "yeti",
+        "syntaxTheme": "dark",
+        "sort": true,
+        "linenums": true,
+        "collapseSymbols": false,
+        "inverseNav": true,
+        "protocol": "html://",
+        "search": true,
+        "methodHeadingReturns": true
+    }
+}
