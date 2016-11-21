@@ -40,7 +40,7 @@
 			<li class="dropdown">
 				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BaseUiMap.html">BaseUiMap</a></li><li><a href="Login_uiMap.html">Login_uiMap</a></li><li><a href="Signup_uiMap.html">Signup_uiMap</a></li><li><a href="Songs_uiMap.html">Songs_uiMap</a></li>
+					<li><a href="BaseUiMap.html">BaseUiMap</a></li><li><a href="Home_uiMap.html">Home_uiMap</a></li><li><a href="Login_uiMap.html">Login_uiMap</a></li><li><a href="Profile_uiMap.html">Profile_uiMap</a></li><li><a href="Signup_uiMap.html">Signup_uiMap</a></li><li><a href="Songs_uiMap.html">Songs_uiMap</a></li>
 				</ul>
 			</li>
 			
@@ -84,14 +84,21 @@
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">import _Base_uiMap from '../_Base.uiMap'
+            class="sunlight-highlight-javascript linenums">import BaseUiMap from '../_Base.uiMap'
 
 /**
- * A class with keys and values for css selectors
+ * @interface Home_uiMap
+ * @summary A uiMap containing selectors for the Home_page
+ * @extends BaseUiMap
  */
-export default class UiMap extends _Base_uiMap {
+export default class UiMap extends BaseUiMap {
 
     /* URL &amp; Title */
+    /**
+     * @method url
+     * @memberOf Signup_uiMap
+     * @returns {string} a stringified url of the page
+     */
     get url() {
         return `${browser.options.env.home_url}`;
     }

@@ -1,11 +1,18 @@
-import _Base_uiMap from '../_Base.uiMap';
+import BaseUiMap from '../_Base.uiMap';
 
 /**
- * A class with keys and values for css selectors
+ * @interface Login_uiMap
+ * @summary A uiMap containing selectors for the Setlists_page
+ * @extends BaseUiMap
  */
-export default class UiMap extends _Base_uiMap{
+export default class UiMap extends BaseUiMap{
 
     /* URL & Title */
+    /**
+     * @method url
+     * @memberOf Signup_uiMap
+     * @returns {string} a stringified url of the page
+     */
     get url() {
         return `${browser.options.env.setLists_url}`;
     }
